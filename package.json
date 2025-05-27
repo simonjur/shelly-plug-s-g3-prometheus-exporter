@@ -1,12 +1,11 @@
 {
-  "name": "shelly",
+  "name": "shelly-plug-s-gen3-prometheus-exporter",
   "version": "1.0.0",
   "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "index": "tsx --env-file=.env index.ts",
-    "api": "tsx spi.ts"
+    "index": "tsx --env-file=.env src/index.ts"
   },
   "author": "",
   "license": "ISC",
