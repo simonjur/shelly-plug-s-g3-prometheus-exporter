@@ -3,6 +3,12 @@ name: Build and Push Docker Image
 on:
   push:
     branches: [ main ]
+    paths:
+      - '**.ts'
+      - 'package*'
+      - '.github/workflows/build-image.yaml'
+      - Dockerfile
+      - tsconfig.json
   workflow_dispatch:
 
 permissions:
