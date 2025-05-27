@@ -11,7 +11,7 @@
 ```yaml
 services:
   shelly-exporter:
-    image: todo
+    image: ghcr.io/simonjur/shelly-plug-s-g3-prometheus-exporter/shelly-plug-s-gen3-exporter:latest
     container_name: shelly-exporter
     restart: unless-stopped
     network_mode: host
