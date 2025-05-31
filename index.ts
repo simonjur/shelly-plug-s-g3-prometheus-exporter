@@ -94,7 +94,9 @@ async function fetchPlugName(ip: string, mdnsName: string): Promise<{ name: stri
 async function setupPlug(mdnsName: string, ip: string): Promise<void> {
     if (plugInfo[mdnsName]) return;
 
-    const { name, metricPrefix } = await fetchPlugName(ip, mdnsName);
+    const { name } = await fetchPlugName(ip, mdnsName);
+
+    const metricPrefix = `shelly_plug_s`;
 
     const gauges: Gauges = {
         power: new client.Gauge({
