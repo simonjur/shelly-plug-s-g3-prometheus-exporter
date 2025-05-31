@@ -15,4 +15,4 @@ COPY . .
 RUN npm install -g tsx
 
 # Set the default command
-CMD ["tsx", "src/index.ts"]
+CMD ["tsx", "index.ts"]
