@@ -100,18 +100,22 @@ async function setupPlug(mdnsName: string, ip: string): Promise<void> {
         power: new client.Gauge({
             name: `${metricPrefix}_power`,
             help: `Power usage in watts for ${name}`,
+            labelNames: ["mdnsName"],
         }),
         current: new client.Gauge({
             name: `${metricPrefix}_current`,
             help: `Current in amps for ${name}`,
+            labelNames: ["mdnsName"],
         }),
         voltage: new client.Gauge({
             name: `${metricPrefix}_voltage`,
             help: `Voltage in volts for ${name}`,
+            labelNames: ["mdnsName"],
         }),
         temp: new client.Gauge({
             name: `${metricPrefix}_temp`,
             help: `Plug temperature in Celsius for ${name}`,
+            labelNames: ["mdnsName"],
         }),
     };
 
@@ -126,23 +130,23 @@ async function setupPlug(mdnsName: string, ip: string): Promise<void> {
 }
 
 async function updateMetricsForPlug(plug: PlugInfo): Promise<void> {
-    const { name, gauges, ip } = plug;
+    const { name, gauges, ip, mdnsName } = plug;
     const url = `http://${ip}/rpc/Switch.GetStatus?id=0`;
     try {
         const { data } = await axios.get(url, { timeout: 2000 });
-        gauges.power.set(data.apower ?? 0);
-        gauges.current.set(data.current ?? 0);
-        gauges.voltage.set(data.voltage ?? 0);
+        gauges.power.set({mdnsName}, data.apower ?? 0);
+        gauges.current.set({mdnsName}, data.current ?? 0);
+        gauges.voltage.set({mdnsName} ,data.voltage ?? 0);
         if (data.temperature && typeof data.temperature.tC === "number") {
-            gauges.temp.set(data.temperature.tC);
+            gauges.temp.set({mdnsName}, data.temperature.tC);
         } else {
-            gauges.temp.set(0);
+            gauges.temp.set({mdnsName}, 0);
         }
     } catch (err) {
-        gauges.power.set(NaN);
-        gauges.current.set(NaN);
-        gauges.voltage.set(NaN);
-        gauges.temp.set(NaN);
+        gauges.power.set({mdnsName}, NaN);
+        gauges.current.set({mdnsName}, NaN);
+        gauges.voltage.set({mdnsName}, NaN);
+        gauges.temp.set({mdnsName}, NaN);
         console.error(`Error updating metrics for ${name} (${ip}):`, (err as Error).message);
     }
 }
