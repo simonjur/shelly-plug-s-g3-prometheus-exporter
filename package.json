@@ -5,18 +5,33 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "index": "tsx --env-file=.env src/index.ts"
+    "dev": "tsx index.ts",
+    "start": "tsx index.ts"
   },
-  "author": "",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/simonjur/shelly-plug-s-g3-prometheus-exporter"
+  },
+  "author": "simonjur",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "axios": "^1.9.0",
+    "@types/node": "^24.0.15",
+    "axios": "^1.10.0",
+    "dotenv": "^17.2.0",
     "express": "^5.1.0",
     "lodash": "^4.17.21",
     "mdns-js": "^1.0.3",
     "prom-client": "^15.1.3",
     "shellies-ng": "^1.5.1",
-    "tsx": "^4.19.4"
+    "tsx": "^4.20.3",
+    "yaml": "^2.8.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/lodash": "^4.17.20"
   }
 }
