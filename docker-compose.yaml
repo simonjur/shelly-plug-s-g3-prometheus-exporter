@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile
     image: ghcr.io/simonjur/shelly-plug-s-g3-prometheus-exporter/shelly-plug-s-gen3-exporter:latest
     environment:
-      LISTEN_PORT: 10777
+      LISTEN_PORT: 9769
     ports:
       - 10777:10777
     container_name: shelly-exporter
